@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Avito Test</string>
+  <string name="delete_card_text">Удалить</string>
+</resources>
