@@ -75,4 +75,14 @@ class MainFragment : Fragment() {
     binding.cardsView.removeItemDecorationAt(0)
     binding.cardsView.addItemDecoration(GridItemDecoration(gridSpacingPx.toInt(), manager.spanCount))
   }
+
+  override fun onResume() {
+    viewModel.startTimer()
+    super.onResume()
+  }
+
+  override fun onPause() {
+    viewModel.stopTimer()
+    super.onPause()
+  }
 }

@@ -1,6 +1,7 @@
 package com.example.avitotest.ui.main
 
 import android.os.Handler
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.avitotest.model.CardData
@@ -13,13 +14,7 @@ class MainViewModel : ViewModel() {
   private val deletedPull = MutableLiveData<List<CardData>>()
 
   private val handler = Handler()
-
-  private val runnable: Runnable = Runnable {
-    run {
-      addCard()
-      handler.postDelayed(runnable, 5000)
-    }
-  }
+  private lateinit var runnable: Runnable
 
   init {
     val data = ArrayList<CardData>()
@@ -27,7 +22,19 @@ class MainViewModel : ViewModel() {
       data.add(CardData(i.toString()))
       cardsData.value = data.toList()
     }
+  }
+
+  fun startTimer() {
+    runnable = Runnable {
+      addCard()
+      handler.postDelayed(runnable, 5000)
+    }
+
     handler.postDelayed(runnable, 5000)
+  }
+
+  fun stopTimer() {
+    handler.removeCallbacks(runnable)
   }
 
   private fun addCard() {
